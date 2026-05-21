@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include<windows.h>
 #include<conio.h>
 
@@ -83,6 +84,26 @@ void clr(unsigned char *a){
     }
 }
 
+void spawn_food(struct Point s[],int len,struct Point *f){
+    int i,conflict;
+    while(1){
+        int tgt_x=rand()%8;
+        int tgt_y=rand()%8;
+        conflict=0;
+        for(i=0;i<len;i++){
+            if(s[i].x==tgt_x&&s[i].y==tgt_y){
+                conflict=1;
+                break;
+            }
+        }
+        if(conflict ==0){
+            f->x=tgt_x;
+            f->y=tgt_y;
+            break;
+        }
+    }
+}
+
 int check_collision(struct Point s[], int len){
     int i;
 
@@ -107,10 +128,8 @@ int main(){
         [2]={.x=3,.y=5},
     };
     
-    struct Point food={
-        .x=5,
-        .y=3
-    };
+    struct Point food;
+    spawn_food(snake,snake_len,&food);
     while(1){
         if(kbhit()){
             ch=getch();
@@ -153,8 +172,7 @@ int main(){
 
             snake[snake_len-1].x=snake[curr_tail_idx].x;
             snake[snake_len-1].y=snake[curr_tail_idx].y;
-            food.x=rand()%8;
-            food.y=rand()%8;
+            spawn_food(snake,snake_len,&food);
         } else {
             draw_food_to_buffer(food);
         }
