@@ -148,7 +148,11 @@ int main(){
         }
         clr(frame_buffer);
         if(food_collision_check(snake,snake_len,food)==1){
+            int curr_tail_idx=snake_len-1;
             snake_len++;
+
+            snake[snake_len-1].x=snake[curr_tail_idx].x;
+            snake[snake_len-1].y=snake[curr_tail_idx].y;
             food.x=rand()%8;
             food.y=rand()%8;
         } else {
