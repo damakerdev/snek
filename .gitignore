@@ -1,0 +1,13 @@
+*.exe
+*.out
+*.app
+
+*.o
+*.obj
+
+*.log
+*.stackdump
+
+.vscode/
+*.layout
+*.win
