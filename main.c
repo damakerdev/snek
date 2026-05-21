@@ -17,12 +17,19 @@ void print_buffer(void){
     for(y=0;y<HEIGHT;y++){
         for(x=0;x<WIDTH;x++){
             int idx=(y*WIDTH)+x;
-            if(frame_buffer[idx]==2){
-                printf("0");
-            } else if(frame_buffer[idx]==1){
-                printf("#");
-            } else {
-                printf(".");
+            switch(frame_buffer[idx]){
+                case 1:
+                    printf("#");
+                    break;
+                case 2:
+                    printf("o");
+                    break;
+                case 3:
+                    printf("a");
+                    break;
+                default:
+                    printf(".");
+                    break;
             }
         }
         printf("\n");
@@ -51,6 +58,22 @@ void draw_snake_to_buffer(struct Point s[], int len){
             frame_buffer[idx]=1;
         }
     }
+}
+
+void draw_food_to_buffer(struct Point f){
+    int food_idx=(f.y*WIDTH)+f.x;
+    frame_buffer[food_idx]=3;
+}
+
+int food_collision_check(struct Point s[], int len, struct Point f ){
+    int i;
+    int food_idx=(f.y*WIDTH)+f.x;
+    for(i=0;i<len;i++){
+        if(s[i].x==f.x && s[i].y==f.y){
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void clr(unsigned char *a){
@@ -84,6 +107,10 @@ int main(){
         [2]={.x=3,.y=5},
     };
     
+    struct Point food={
+        .x=5,
+        .y=3
+    };
     while(1){
         if(kbhit()){
             ch=getch();
@@ -112,12 +139,21 @@ int main(){
                     break;
             }
         }
+
+
+        update_snake_physics(snake,snake_len,dir_x, dir_y);
         if(check_collision(snake,snake_len)==1){
             printf("GAME OVER!");
             break;
         }
-        update_snake_physics(snake,snake_len,dir_x, dir_y);
         clr(frame_buffer);
+        if(food_collision_check(snake,snake_len,food)==1){
+            snake_len++;
+            food.x=rand()%8;
+            food.y=rand()%8;
+        } else {
+            draw_food_to_buffer(food);
+        }
         draw_snake_to_buffer(snake,snake_len);
         print_buffer();
         Sleep(300);
