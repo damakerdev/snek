@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<windows.h>
 #include<conio.h>
+#include<time.h>
+
 
 #define WIDTH 8
 #define HEIGHT 8
@@ -120,6 +122,7 @@ int check_collision(struct Point s[], int len){
 }
 
 int main(){
+    srand(time(NULL));
     int snake_len=3,dir_x=1,dir_y=0;
     int ch;
     struct Point snake[20]={
