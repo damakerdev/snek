@@ -23,8 +23,12 @@ void reset(void){
 }
 
 
-void print_buffer(void){
+void print_buffer(int curr_score){
+
     int x,y;
+    printf("===================\n");
+    printf("SNEK | SCORE:%06d\n",curr_score);
+    printf("===================\n");
     for(y=0;y<HEIGHT;y++){
         for(x=0;x<WIDTH;x++){
             int idx=(y*WIDTH)+x;
@@ -132,6 +136,7 @@ int check_collision(struct Point s[], int len){
 int main(){
     srand(time(NULL));
     int snake_len=3,dir_x=1,dir_y=0;
+    int score=0;
     int ch;
     struct Point snake[20]={
         [0]={.x=3,.y=3},
@@ -182,6 +187,7 @@ int main(){
             int curr_tail_idx=snake_len-1;
             snake_len++;
 
+            score+=100;
             snake[snake_len-1].x=snake[curr_tail_idx].x;
             snake[snake_len-1].y=snake[curr_tail_idx].y;
             spawn_food(snake,snake_len,&food);
@@ -189,8 +195,8 @@ int main(){
         draw_food_to_buffer(food);
         draw_snake_to_buffer(snake,snake_len);
         reset();
-        print_buffer();
-        Sleep(300);
+        print_buffer(score);
+        Sleep(250);
    }
     return 0;
     
