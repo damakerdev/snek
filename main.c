@@ -15,6 +15,14 @@ struct Point {
     int y;
 };
 
+void reset(void){
+    COORD cursor_pos;
+    cursor_pos.X=0;
+    cursor_pos.Y=0;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),cursor_pos);
+}
+
+
 void print_buffer(void){
     int x,y;
     for(y=0;y<HEIGHT;y++){
@@ -133,6 +141,7 @@ int main(){
     
     struct Point food;
     spawn_food(snake,snake_len,&food);
+    system("cls");
     while(1){
         if(kbhit()){
             ch=getch();
@@ -176,10 +185,10 @@ int main(){
             snake[snake_len-1].x=snake[curr_tail_idx].x;
             snake[snake_len-1].y=snake[curr_tail_idx].y;
             spawn_food(snake,snake_len,&food);
-        } else {
-            draw_food_to_buffer(food);
         }
+        draw_food_to_buffer(food);
         draw_snake_to_buffer(snake,snake_len);
+        reset();
         print_buffer();
         Sleep(300);
    }
