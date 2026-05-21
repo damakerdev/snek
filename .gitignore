@@ -2,6 +2,9 @@
 *.out
 *.app
 
+build/
+bin/
+
 *.o
 *.obj
 

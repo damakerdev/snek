@@ -60,8 +60,23 @@ void clr(unsigned char *a){
     }
 }
 
+int check_collision(struct Point s[], int len){
+    int i;
+
+    if(s[0].x<0 || s[0].x>7 || s[0].y<0 || s[0].y>7){
+        return 1;
+    }
+
+    for(i=1;i<len;i++){
+        if(s[0].x==s[i].x && s[0].y==s[i].y){
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int main(){
-    int idx,i,snake_len=3,dir_x=0,dir_y=0;
+    int snake_len=3,dir_x=1,dir_y=0;
     int ch;
     struct Point snake[20]={
         [0]={.x=3,.y=3},
@@ -94,9 +109,12 @@ int main(){
                     break;
                     
                 default:
-                    printf("error processing input");
-                    return 1;
+                    break;
             }
+        }
+        if(check_collision(snake,snake_len)==1){
+            printf("GAME OVER!");
+            break;
         }
         update_snake_physics(snake,snake_len,dir_x, dir_y);
         clr(frame_buffer);
