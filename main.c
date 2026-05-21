@@ -4,7 +4,6 @@
 #include<conio.h>
 #include<time.h>
 
-
 #define WIDTH 8
 #define HEIGHT 8
 
@@ -180,6 +179,7 @@ int main(){
         update_snake_physics(snake,snake_len,dir_x, dir_y);
         if(check_collision(snake,snake_len)==1){
             printf("GAME OVER!");
+            getch();
             break;
         }
         clr(frame_buffer);
