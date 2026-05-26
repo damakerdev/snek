@@ -1,7 +1,7 @@
 # snek 
 snek is a classic Snake game clone that is made from scratch in pure C. It is basically a arcade snake game engine that i built to get my hands dirty on low level game dev. Stripping away the abstraction layers from code really helped me brush up my low level skills.
 
-** REVIEWER NOTES: I am porting this basic c project to be displayed in an 8x8 Led Matrix module using esp3 ** 
+**REVIEWER NOTES: I am porting this basic c project to be displayed in an 8x8 Led Matrix module using esp3** 
 
 ## peek
 <img width="276" height="352" alt="image" src="https://github.com/user-attachments/assets/c9c3fd59-0cb8-4a78-85fe-f39ba80ff28f" />
