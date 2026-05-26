@@ -1,12 +1,5 @@
-*.exe
-*.out
 *.app
-
-build/
 bin/
-
-*.o
-*.obj
 
 *.log
 *.stackdump
@@ -14,3 +7,18 @@ bin/
 .vscode/
 *.layout
 *.win
+
+*.exe
+*.o
+*.obj
+build/
+
+.pio/
+.pioenvs/
+.piolibdeps/
+.clang_complete
+.gcc-flags.json
+tags
+
+.DS_Store
+Thumbs.db
