@@ -14,8 +14,6 @@ struct Point {
     int y;
 };
 
-
-
 void reset(void){
     COORD cursor_pos;
     cursor_pos.X=0;
